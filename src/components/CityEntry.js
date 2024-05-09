@@ -8,7 +8,14 @@ export default function CityEntry({ budget, setBudget }) {
   const [dateFrom, setDateFrom] = useState('');
   const [dateTo, setDateTo] = useState('');
 
+//   const [food, setDateTo] = useState('');
+//   const [housing, setDateTo] = useState('');
+//   const [food, setDateTo] = useState('');
+//   const [food, setDateTo] = useState('');
+
   const handleSubmit = (event) => {
+
+    console.log('Submit button clicked');
     event.preventDefault(); // Prevents the default form submission behavior
 
     // Now you can use the state variables country, city, budget, dateFrom, and dateTo
@@ -16,23 +23,22 @@ export default function CityEntry({ budget, setBudget }) {
     
     // Define your request body
     const requestBody = {
-      country: country,
-      city: city,
-      budget: budget,
-      dateFrom: dateFrom,
-      dateTo: dateTo
+      tp: country,
+      loc: city,
+      sdat: dateFrom,
+      edat: dateTo
     };
 
     console.log(requestBody);
 
-    // Make your API request here
-    // axios.post('http://192.168.90.239:5000', requestBody)
-    //   .then((response) => {
-    //     console.log(response.data);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error:', error);
-    //   });
+    //Make your API request here
+    axios.post('http://192.168.90.221:5000/trips&email=email', requestBody)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error('_________Error:', error);
+      });
   };
 
   return (
@@ -110,7 +116,7 @@ export default function CityEntry({ budget, setBudget }) {
           <Categories />
         </div>
 
-        <button style={{ marginTop: '1rem' }}>Submit</button>
+        <button style={{ marginTop: '1rem' }} onClick={handleSubmit}>Submit</button>
       </form>
     </>
   )

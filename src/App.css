@@ -80,13 +80,17 @@ body {
 }
 .budget-box{
   font-size: 1.5rem;
-  background-color: #eee;
+  background-color: #EEEEEE;
   width: 200px;
   padding: 0.5rem 1rem;
+  border: 1px solid #014748;
+  border-radius: 5px;
+  margin-left: 90px;
+  margin-top: 2rem;
 }
 
 .form-box{
-  border: 1px solid #1e1e1e;
+  border: 1px solid #014748;
   border-radius: 10px;
   margin: 30px;
   padding-bottom: 1rem;

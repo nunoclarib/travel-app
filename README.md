@@ -1,81 +1,70 @@
-<<<<<<< HEAD
-class Drink:
-    def __init__(self, drink_name: str, alcohol: str, category: str, bac: float):
-        self.drink_name = drink_name
-        self.alcohol = alcohol
-        self.category = category
-        self.bac = bac
+# Getting Started with Create React App
 
-    @staticmethod
-    def load_drinks():
-        with open("../repo/drinks.json", "r") as file:
-            return json.load(file)
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-    def store_drinks(self):
-        with open("../repo/drinks.json", "w") as file:
-            json.dump(file, "w")
+## Available Scripts
 
-    def get_drinks_by_name(self, drink_name: str):
-        self.load_drinks()
+In the project directory, you can run:
 
-=======
+### `npm start`
 
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-<<<<<<< HEAD
-    @property
-    def drinks(self):
-        return self._drinks
-=======
+### `npm test`
 
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
+### `npm run build`
 
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
+### `npm run eject`
 
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
+## Learn More
 
-<<<<<<< HEAD
-class User:
-    def __init__(self, name, password, age, eatean, email, address, weight, gender, dateOfBirth, emergencyContacts, drinks_consumed, bac):
-        self.name = name
-        self.password = password
-        self.age = age
-        self.eatean = eatean
-        self.email = email
-        self.address = address
-        self.weight = weight
-        self.gender = gender
-        self.dateOfBirth = dateOfBirth
-        self.emergencyContacts = emergencyContacts
-        self.drinks_consumed = []
-        self.bac = 0.0
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-    def add_drink(self, drink_name, alcohol_percentage):
-        self.drinks_consumed.append((drink_name, alcohol_percentage))
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-    def calculate_bac(self):
-        total_alcohol_consumed = 0
-        for drink_name, alcohol_percentage in self.drinks_consumed:
-            # Convert alcohol percentage to a float
-            try:
-                alcohol_percentage = float(alcohol_percentage.strip('%'))
-            except ValueError:
-                print(f"Invalid alcohol percentage for drink {drink_name}. Skipping...")
-                continue
-            # Calculate alcohol consumed in grams
-            alcohol_consumed = (alcohol_percentage / 100) * self.weight * 0.789
-            total_alcohol_consumed += alcohol_consumed
+### Code Splitting
 
-        # Calculate BAC
-        if self.gender.lower() == 'male':
-            r = 0.68
-        else:
-            r = 0.55
-        bac = (total_alcohol_consumed / (self.weight * r)) * 100
-        self.bac = bac
-=======
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+
+### Analyzing the Bundle Size
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+
+### Making a Progressive Web App
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+
+### Advanced Configuration
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+
+### Deployment
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+
+### `npm run build` fails to minify
+
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

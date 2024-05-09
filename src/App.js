@@ -2,12 +2,32 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import "./App.css";
 
+import Navbar from "./components/Navbar";
+
+import CityEntry from "./components/CityEntry";
+
 function App() {
-  //const [clicked, setClicked] = useState(false);
+  const [addCity, setAddCity] = useState(false);
+  const [budget, setBudget] = useState('');
 
   return (
-    <Div className="App">
-    </Div>
+    <div className="App">
+
+      <Navbar />
+      <div>
+      <div className="budget-box">{budget ? budget : 0} €</div>
+      </div>
+
+      {/* Component React */}
+
+      {addCity && <CityEntry budget={budget} setBudget={setBudget}/>}
+
+      {!addCity && <button 
+      onClick={() => setAddCity(!addCity)}
+      >Plus</button>}
+      
+
+    </div>
   );
 }
 

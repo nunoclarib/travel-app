@@ -48,39 +48,79 @@ body {
   padding: 0;
 }
 
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Fundo semi-transparente */
+.navbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.logo-navbar{
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* Estilo do popup */
-.popup {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  text-align: center; /* Centraliza o conteúdo */
+.ava-icon{
+  text-align: left;
+  margin: 1rem 0 0 1rem;
 }
 
-/* Estilo dos botões */
-.popup button {
-  margin: 5px;
-  padding: 10px 20px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+.ava-img{
+  width: 40px;
+  height: 40px;
 }
 
-.popup button:hover {
-  background-color: #0056b3;
+.settings-icon{
+  text-align: right;
+  margin: 1rem 1rem 0 0;
+}
+
+.settings-img{
+  width: 40px;
+  height: 40px;
+}
+.budget-box{
+  font-size: 1.5rem;
+  background-color: #eee;
+  width: 200px;
+  padding: 0.5rem 1rem;
+}
+
+.form-box{
+  border: 1px solid #1e1e1e;
+  border-radius: 10px;
+  margin: 30px;
+  padding-bottom: 1rem;
+}
+
+.country-grid{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+.align-inputs{
+  text-align: left;
+  margin-left: 1rem;
+}
+
+h4{
+  font-size: 0.9rem;
+  font-weight: normal;
+  margin: 0.8rem 0.3rem 0.3rem 0;
+  text-align: left;
+}
+
+input[type="date" i] {
+  font-family: monospace;
+  padding-inline-start: 1px;
+  cursor: default;
+  overflow: hidden;
+  padding: 0px;
+  color: #8f8e8e;
+}
+
+.categories-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
 }

@@ -44,6 +44,29 @@ export default function CityEntry({ mainBudget, setMainBudget }) {
 
     console.log(requestBody);
 
+    const requestBody2 = {
+      Restaurants: restaurants,
+      Transportation: transportation,
+      Habitation: rentPerDay,
+      Others: others,
+    };
+
+    console.log(requestBody2);
+
+//fazer pricepercategory e novo simulate?????? 
+
+const pricepercategoryUrl = `http://192.168.90.55:5000/pricepercategory`
+
+  axios
+  .post(pricepercategoryUrl, requestBody2)
+  .then((response) => {
+    console.log(response.data);
+
+  })
+  .catch((error) => {
+    console.error("_________Error:", error);
+  });
+
     //Make your API request here
     axios
       .post("http://192.168.90.55:5000/trips?email=stuff@com", requestBody)
@@ -167,6 +190,7 @@ export default function CityEntry({ mainBudget, setMainBudget }) {
             setRestaurants={setRestaurants}
             transportation={transportation}
             setTransportation={setTransportation}
+            budget={budget}
           />
         </div>
         {!trip && (

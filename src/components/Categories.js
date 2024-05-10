@@ -11,6 +11,7 @@ function Categories({
   setRestaurants,
   transportation,
   setTransportation,
+  budget
 }) {
   const [hasRentPerDay, setHasRentPerDay] = useState(false);
   const [hasRestaurants, setHasRestaurants] = useState(false);
@@ -45,21 +46,25 @@ function Categories({
 
   let days = 9;
 
+  const url = 'http://192.168.90.55:5000'
+  const email = 'stuff@com'
+
   useEffect(() => {
     axios
-      .get(`http://192.168.90.55:5000/simulate?days=${days}&email=stuff@com`)
+      .get(`${url}/simulate?days=${days}&email=${email}`)
       .then((response) => {
         console.log(response.data);
 
-        setRestaurants(response.data[0]);
-        setRentPerDay(response.data[1]);
-        setTransportation(response.data[2]);
-        setOthers(response.data[3]);
+        setRestaurants(Math.floor(((response.data[0] * budget)/days)/100) );
+        setRentPerDay(Math.floor(((response.data[1] * budget)/days)/100));
+        setTransportation(Math.floor(((response.data[2] * budget)/days)/100));
+        setOthers(Math.floor(((response.data[3] * budget)/days)/100));
+
       })
       .catch((error) => {
         console.error("Error fetching drinks:", error);
       });
-  }, [days]);
+  }, [days, budget]);
 
   return (
     <Container>

@@ -9,19 +9,17 @@ import CityEntry from "./components/CityEntry";
 
 function App() {
   const [addCity, setAddCity] = useState(false);
-  const [budget, setBudget] = useState('');
+  const [mainBudget, setMainBudget] = useState('');
 
   return (
     <div className="App">
 
       <Navbar />
       <div>
-      <div className="budget-box">{budget ? budget : 0} €</div>
+      <div className="budget-box">{mainBudget ? mainBudget : 0} €</div>
       </div>
 
-      {/* Component React */}
-
-      {addCity && <CityEntry budget={budget} setBudget={setBudget}/>}
+      {addCity && <CityEntry mainBudget={mainBudget} setMainBudget={setMainBudget}/>}
 
       {!addCity && 
       <img onClick={() => setAddCity(!addCity)}src={plusButton}

@@ -98,9 +98,9 @@ function Categories() {
 
           <ImageWrapper >
             <Image src='https://cdn.builder.io/api/v1/image/assets/TEMP/9c27a33deabe6ad527372ef8bd6676130bcd959750557df9f2ecf3d67b5d7260?apiKey=16c16e3a04b14066bc4e94c492815cc8&'/>
-            <input type="checkbox" onChange={handleOthersChange}/>
+            <input type="checkbox" onChange={handleOthersChange} />
 
-            {hasOthers && <RoundedBox value={others && others} onChange={handleOthersOnChange}/>}
+            {hasOthers && <RoundedBox  value={others && others} onChange={handleOthersOnChange}/>}
 
           </ImageWrapper>
 

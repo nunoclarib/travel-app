@@ -9,18 +9,23 @@ export default function CityEntry({ mainBudget, setMainBudget }) {
   const [dateTo, setDateTo] = useState("");
   const [budget, setBudget] = useState("");
 
+  const [others, setOthers] = useState(null);
+  const [rentPerDay, setRentPerDay] = useState(null);
+  const [restaurants, setRestaurants] = useState(null);
+  const [transportation, setTransportation] = useState(null);
+
   const [dailyValue, setDailyValue] = useState("");
   const [trip, setTrip] = useState(null);
 
   const handleDailyValue = (event) => {
     setDailyValue(event.target.value);
-  }
+  };
 
   const changeBudget = (event) => {
     event.preventDefault();
     setBudget(budget - dailyValue);
     setMainBudget(mainBudget - dailyValue);
-  }
+  };
 
   const handleSubmit = (event) => {
     console.log("Submit button clicked");
@@ -46,8 +51,15 @@ export default function CityEntry({ mainBudget, setMainBudget }) {
         console.log(response.data);
         setMainBudget(mainBudget + budget);
 
-        setTrip(response.data)
 
+        Object.assign(response.data, {
+          Restaurant: transportation ? transportation : null,
+          Rent: rentPerDay ? rentPerDay : null,
+          Transportation: transportation ? transportation : null,
+          Others: others ? others : null,
+        });
+
+        setTrip(response.data);
       })
       .catch((error) => {
         console.error("_________Error:", error);
@@ -60,41 +72,41 @@ export default function CityEntry({ mainBudget, setMainBudget }) {
         <div className="country-grid">
           <div className="align-inputs">
             <h4 htmlFor="countries">Country</h4>
-            { trip ? 
-            <p style={{color:'gray'}}>Portugal</p>
-             : <select
-              name="countries"
-              id="countries"
-              value={country}
-              onChange={(e) => setCountry(e.target.value)}
-            >
-              <option value="">Select a country</option>
-              <option value="portugal">Portugal</option>
-              <option value="spain">Spain</option>
-              <option value="uk">United Kingdom</option>
-              <option value="germany">Germany</option>
-              <option value="france">France</option>
-              <option value="brazil">Brazil</option>
-              <option value="usa">USA</option>
-            </select>}
-            
+            {trip ? (
+              <p style={{ color: "gray" }}>Portugal</p>
+            ) : (
+              <select
+                name="countries"
+                id="countries"
+                value={country}
+                onChange={(e) => setCountry(e.target.value)}
+              >
+                <option value="">Select a country</option>
+                <option value="portugal">Portugal</option>
+                <option value="spain">Spain</option>
+                <option value="uk">United Kingdom</option>
+                <option value="germany">Germany</option>
+                <option value="france">France</option>
+                <option value="brazil">Brazil</option>
+                <option value="usa">USA</option>
+              </select>
+            )}
           </div>
 
           <div className="align-inputs">
             <h4>City</h4>
 
-            { trip ? 
-            <p style={{color:'gray'}}>{trip.location}</p>
-             : <input
-             type="text"
-             placeholder="e.g. Lisbon"
-             value={city}
-             onChange={(e) => setCity(e.target.value)}
-             style={{ width: "120px" }}
-           />
-            }
-
-            
+            {trip ? (
+              <p style={{ color: "gray" }}>{trip.location}</p>
+            ) : (
+              <input
+                type="text"
+                placeholder="e.g. Lisbon"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                style={{ width: "120px" }}
+              />
+            )}
           </div>
         </div>
 
@@ -103,61 +115,73 @@ export default function CityEntry({ mainBudget, setMainBudget }) {
           <div className="country-grid">
             <div className="align-inputs">
               <h4>From:</h4>
-              { trip ? 
-            <p style={{color:'gray'}}>{trip.startDate}</p> : 
-              <input
-                type="date"
-                placeholder="From Date"
-                value={dateFrom}
-                onChange={(e) => setDateFrom(e.target.value)}
-              />
-            }
+              {trip ? (
+                <p style={{ color: "gray" }}>{trip.startDate}</p>
+              ) : (
+                <input
+                  type="date"
+                  placeholder="From Date"
+                  value={dateFrom}
+                  onChange={(e) => setDateFrom(e.target.value)}
+                />
+              )}
             </div>
             <div className="align-inputs">
               <h4>To:</h4>
-              { trip ? 
-            <p style={{color:'gray'}}>{trip.endDate}</p> : 
-              <input
-                type="date"
-                placeholder="To Date"
-                value={dateTo}
-                onChange={(e) => setDateTo(e.target.value)}
-              />}
+              {trip ? (
+                <p style={{ color: "gray" }}>{trip.endDate}</p>
+              ) : (
+                <input
+                  type="date"
+                  placeholder="To Date"
+                  value={dateTo}
+                  onChange={(e) => setDateTo(e.target.value)}
+                />
+              )}
             </div>
           </div>
         </div>
 
         <div className="align-inputs">
           <h4>Budget Allocation</h4>
-          { trip ? 
-            <p style={{color:'gray'}}>{trip.Totalprice} €</p> : 
-          <input
-            type="text"
-            placeholder="e.g 10000€"
-            value={budget}
-            onChange={(e) => setBudget(e.target.value)}
-            style={{ width: "308px" }}
-          />
-        }
+          {trip ? (
+            <p style={{ color: "gray" }}>{trip.Totalprice} €</p>
+          ) : (
+            <input
+              type="text"
+              placeholder="e.g 10000€"
+              value={budget}
+              onChange={(e) => setBudget(e.target.value)}
+              style={{ width: "308px" }}
+            />
+          )}
         </div>
 
         <div className="categories-container">
-          <Categories />
+          <Categories
+            others={others}
+            setOthers={setOthers}
+            rentPerDay={rentPerDay}
+            setRentPerDay={setRentPerDay}
+            restaurants={restaurants}
+            setRestaurants={setRestaurants}
+            transportation={transportation}
+            setTransportation={setTransportation}
+          />
         </div>
-
-        <button style={{ marginTop: "1rem" }} onClick={handleSubmit}>
-          Submit
-        </button>
+        {!trip && (
+          <button style={{ marginTop: "1rem" }} onClick={handleSubmit}>
+            Submit
+          </button>
+        )}
       </form>
 
-
-    <form>
-        <input onChange={handleDailyValue}/>
+      <form>
+        <input onChange={handleDailyValue} />
         <button style={{ marginTop: "1rem" }} onClick={changeBudget}>
           Add Daily Value
         </button>
-    </form>
-
+      </form>
     </>
   );
 }

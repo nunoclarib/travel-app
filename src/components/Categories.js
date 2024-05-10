@@ -1,109 +1,114 @@
-import React,{useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import axios from "axios";
 
-const images = [
-  { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/08fa1ec5695586902b0db38f412e1ef7c61387ff64a7560e9b84d2d929e7f93b?apiKey=16c16e3a04b14066bc4e94c492815cc8&", alt: "Image 1" },
-  { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/e0bc922a972a8b53fcd617aa459aa4443e462a2a681c7e7a1890186bc52e3c07?apiKey=16c16e3a04b14066bc4e94c492815cc8&", alt: "Image 2" },
-  { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/3bb70d57e84972d46a8480dcbb2f09b7d45b5da86ff13d309c19efae202edf81?apiKey=16c16e3a04b14066bc4e94c492815cc8&", alt: "Image 3" },
-  { src: "https://cdn.builder.io/api/v1/image/assets/TEMP/9c27a33deabe6ad527372ef8bd6676130bcd959750557df9f2ecf3d67b5d7260?apiKey=16c16e3a04b14066bc4e94c492815cc8&", alt: "Image 4" },
-];
+function Categories({
+  others,
+  setOthers,
+  rentPerDay,
+  setRentPerDay,
+  restaurants,
+  setRestaurants,
+  transportation,
+  setTransportation,
+}) {
+  const [hasRentPerDay, setHasRentPerDay] = useState(false);
+  const [hasRestaurants, setHasRestaurants] = useState(false);
+  const [hasTransportation, setHasTransportation] = useState(false);
+  const [hasOthers, setHasOthers] = useState(false);
 
-function Categories() {
+  const handleRentChange = (event) => {
+    setHasRentPerDay(event.target.checked);
+  };
+  const handleRestChange = (event) => {
+    setHasRestaurants(event.target.checked);
+  };
+  const handleTransChange = (event) => {
+    setHasTransportation(event.target.checked);
+  };
+  const handleOthersChange = (event) => {
+    setHasOthers(event.target.checked);
+  };
 
-    const [others, setOthers] = useState([]);
-    const [rentPerDay, setRentPerDay] = useState([]);
-    const [restaurants, setRestaurants] = useState([]);
-    const [transportation, setTransportation] = useState([]);
-    
-    const [hasRentPerDay, setHasRentPerDay] = useState(false);
-    const [hasRestaurants, setHasRestaurants] = useState(false);
-    const [hasTransportation, setHasTransportation] = useState(false);
-    const [hasOthers, setHasOthers] = useState(false);
+  const handleRestaurantsOnChange = (event) => {
+    setRestaurants(event.target.value);
+  };
+  const handleRentOnChange = (event) => {
+    setRentPerDay(event.target.value);
+  };
+  const handleTransOnChange = (event) => {
+    setTransportation(event.target.value);
+  };
+  const handleOthersOnChange = (event) => {
+    setOthers(event.target.value);
+  };
 
-    const handleRentChange = (event) => {
-        setHasRentPerDay(event.target.checked);
-    };
-    const handleRestChange = (event) => {
-        setHasRestaurants(event.target.checked);
-    };
-    const handleTransChange = (event) => {
-        setHasTransportation(event.target.checked);
-    };
-    const handleOthersChange = (event) => {
-        setHasOthers(event.target.checked);
-    };
+  let days = 9;
 
-    const handleRestaurantsOnChange = (event) => {
-        setRestaurants(event.target.value);
-    };
-    const handleRentOnChange = (event) => {
-      setRentPerDay(event.target.value);
-    };
-    const handleTransOnChange = (event) => {
-      setTransportation(event.target.value);
-    };
-    const handleOthersOnChange = (event) => {
-      setOthers(event.target.value);
-    };
-
-    
-    let days = 9;
-    
-    useEffect(() => {
+  useEffect(() => {
     axios
       .get(`http://192.168.90.55:5000/simulate?days=${days}&email=stuff@com`)
       .then((response) => {
-
         console.log(response.data);
 
         setRestaurants(response.data[0]);
-        setRentPerDay(response.data[1]);        
+        setRentPerDay(response.data[1]);
         setTransportation(response.data[2]);
         setOthers(response.data[3]);
-
       })
       .catch((error) => {
         console.error("Error fetching drinks:", error);
       });
-    }, [days]
-
-)
+  }, [days]);
 
   return (
     <Container>
-        <ImageWrapper >
-            <Image src='https://cdn.builder.io/api/v1/image/assets/TEMP/08fa1ec5695586902b0db38f412e1ef7c61387ff64a7560e9b84d2d929e7f93b?apiKey=16c16e3a04b14066bc4e94c492815cc8&'/>
-            <input type="checkbox" onChange={handleRestChange}/>
-            {hasRestaurants && <RoundedBox value={restaurants && restaurants} onChange={handleRestaurantsOnChange}/>}
-                
-        </ImageWrapper>
+      <ImageWrapper>
+        <Image src="https://cdn.builder.io/api/v1/image/assets/TEMP/08fa1ec5695586902b0db38f412e1ef7c61387ff64a7560e9b84d2d929e7f93b?apiKey=16c16e3a04b14066bc4e94c492815cc8&" />
+        <input type="checkbox" onChange={handleRestChange} />
+        {hasRestaurants && (
+          <RoundedBox
+            value={restaurants && restaurants}
+            onChange={handleRestaurantsOnChange}
+          />
+        )}
+      </ImageWrapper>
 
-          <ImageWrapper >
+      <ImageWrapper>
+        <Image src="https://cdn.builder.io/api/v1/image/assets/TEMP/e0bc922a972a8b53fcd617aa459aa4443e462a2a681c7e7a1890186bc52e3c07?apiKey=16c16e3a04b14066bc4e94c492815cc8&" />
+        <input type="checkbox" onChange={handleRentChange} />
 
-            <Image src='https://cdn.builder.io/api/v1/image/assets/TEMP/e0bc922a972a8b53fcd617aa459aa4443e462a2a681c7e7a1890186bc52e3c07?apiKey=16c16e3a04b14066bc4e94c492815cc8&'/>
-            <input type="checkbox" onChange={handleRentChange}/>
+        {hasRentPerDay && (
+          <RoundedBox
+            value={rentPerDay && rentPerDay}
+            onChange={handleRentOnChange}
+          />
+        )}
+      </ImageWrapper>
 
-            {hasRentPerDay && <RoundedBox value={rentPerDay && rentPerDay} onChange={handleRentOnChange}/>}
-            
-          </ImageWrapper>
+      <ImageWrapper>
+        <Image src="https://cdn.builder.io/api/v1/image/assets/TEMP/3bb70d57e84972d46a8480dcbb2f09b7d45b5da86ff13d309c19efae202edf81?apiKey=16c16e3a04b14066bc4e94c492815cc8&" />
+        <input type="checkbox" onChange={handleTransChange} />
 
-          <ImageWrapper >
-            <Image src='https://cdn.builder.io/api/v1/image/assets/TEMP/3bb70d57e84972d46a8480dcbb2f09b7d45b5da86ff13d309c19efae202edf81?apiKey=16c16e3a04b14066bc4e94c492815cc8&'/>
-            <input type="checkbox" onChange={handleTransChange}/>
+        {hasTransportation && (
+          <RoundedBox
+            value={transportation && transportation}
+            onChange={handleTransOnChange}
+          />
+        )}
+      </ImageWrapper>
 
-            {hasTransportation && <RoundedBox value={transportation && transportation} onChange={handleTransOnChange}/>}
+      <ImageWrapper>
+        <Image src="https://cdn.builder.io/api/v1/image/assets/TEMP/9c27a33deabe6ad527372ef8bd6676130bcd959750557df9f2ecf3d67b5d7260?apiKey=16c16e3a04b14066bc4e94c492815cc8&" />
+        <input type="checkbox" onChange={handleOthersChange} />
 
-          </ImageWrapper>
-
-          <ImageWrapper >
-            <Image src='https://cdn.builder.io/api/v1/image/assets/TEMP/9c27a33deabe6ad527372ef8bd6676130bcd959750557df9f2ecf3d67b5d7260?apiKey=16c16e3a04b14066bc4e94c492815cc8&'/>
-            <input type="checkbox" onChange={handleOthersChange} />
-
-            {hasOthers && <RoundedBox  value={others && others} onChange={handleOthersOnChange}/>}
-
-          </ImageWrapper>
-
+        {hasOthers && (
+          <RoundedBox
+            value={others && others}
+            onChange={handleOthersOnChange}
+          />
+        )}
+      </ImageWrapper>
     </Container>
   );
 }
